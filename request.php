@@ -1,5 +1,13 @@
 <?php
-
+if (function_exists('curl_version')) {
+    echo 'cURL is enabled.<br>';
+    
+    // Get cURL version
+    $version = curl_version();
+    echo 'cURL version: ' . $version['version'] . '<br>';
+} else {
+    echo 'cURL is not enabled.<br>';
+}
 // Get access token
 function get_access_token($auth_server, $client_id, $client_secret, $scope){ 
     echo "Still here";
