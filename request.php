@@ -1,4 +1,15 @@
 <?php
+// Get the parent directory path using the __DIR__ magic constant
+$parent_dir = dirname(__DIR__);
+$tokendb_path = $parent_dir . "tokendb.json";
+
+$tokendb_string = file_get_contents($tokendb_path);
+// Parse the JSON string into a PHP object
+$tokendb_data = json_decode($tokendb_string);
+
+$access_token = $tokendb_data["access_token"];
+$expires_on = $tokendb_data["expires_on"];
+
 // Get access token
 function get_access_token($auth_server, $client_id, $client_secret, $scope){ 
     $curl = curl_init(); 
@@ -38,18 +49,15 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
 }
 
 // Check if ACCESS_TOKEN environment variable exists
-if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON")) {
-    // Get the parent directory path using the __DIR__ magic constant
-    $parent_dir = dirname(__DIR__);
-
+if ($access_token == "" or time() > $expires_on) {
     // Construct the relative path to the JSON file
-    $json_file_path = $parent_dir . '/config.json';
+    $config_path = $parent_dir . '/config.json';
 
     // Read the contents of the JSON file into a string
-    $json_string = file_get_contents($json_file_path);
+    $config_string = file_get_contents($config_path);
 
     // Parse the JSON string into a PHP object
-    $config_data = json_decode($json_string);
+    $config_data = json_decode($config_string);
 
     // Access the values of the "client_id", "client_secret", and "scope" keys
     $auth_server = $config_data->auth_server;
@@ -65,7 +73,7 @@ if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON")) {
     echo getenv("ACCESS_TOKEN");
     echo getenv("EXPIRES_ON");
 } else {
-    echo "Environment variables set";
+    echo "Token still valid. Expires in ".$expires_on-time()." seconds";
 }
 
 
