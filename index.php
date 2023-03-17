@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php
-
+if (session_status() == 0){
+    echo "Starting session...";
+    session_start();
+    $_SESSION["ACCESS_TOKEN"] = "";
+    $_SESSION["EXPIRES_ON"] = 0;
+}
 function get_domain_name($url) {
   $parsed_url = parse_url($url);
   $domain_parts = explode('.', $parsed_url['host']);
