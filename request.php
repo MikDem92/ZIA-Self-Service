@@ -1,10 +1,9 @@
 <?php
 
 // Get access token
-function get_access_token($auth_server, $client_id, $client_secret, $scope){
-    $curl = curl_init();
-    
+function get_access_token($auth_server, $client_id, $client_secret, $scope){ 
     echo "Still here";
+    $curl = curl_init(); 
 
     curl_setopt_array($curl, array(
       CURLOPT_URL => $auth_server,
@@ -40,7 +39,6 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
             "expires_on" => time() + $response_data->expires_in
         ); 
     }
-
 }
 
 // Check if ACCESS_TOKEN environment variable exists
