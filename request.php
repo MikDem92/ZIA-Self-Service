@@ -2,7 +2,8 @@
 echo session_status();
 print_r($_SESSION);
 
-if (session_status() == PHP_SESSION_NONE){
+if (session_status() == 0){
+    echo "Starting session...";
     session_start();
     $_SESSION["ACCESS_TOKEN"] = "";
     $_SESSION["EXPIRES_ON"] = 0;
@@ -71,7 +72,7 @@ if ($_SESSION["ACCESS_TOKEN"] == "" or time() > $_SESSION["EXPIRES_ON"]) {
     $token_info = get_access_token($auth_server, $client_id, $client_secret, $scope);
     $_SESSION["ACCESS_TOKEN"] = $token_info["access_token"];
     $_SESSION["EXPIRES_ON"] = $token_info["expires_on"];
-    print_r($_SESSION);
+    //print_r($_SESSION);
 } else {
     echo "Token still valid. Expires in ".$_SESSION["EXPIRES_ON"] - time()." seconds";
 }
