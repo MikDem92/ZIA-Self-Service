@@ -79,8 +79,8 @@ $url = $_POST["url"];
 $category_name = "API Test Category";
 $category_id = "CUSTOM_03";
 
-add_url_to_category($auth_server, $category_name, $category_id, $url, $_SESSION["ACCESS_TOKEN"]);
-
+add_url_to_category($category_name, $category_id, $url, $_SESSION["ACCESS_TOKEN"]);
+activate($_SESSION["ACCESS_TOKEN"]);
 
 ?>
 
