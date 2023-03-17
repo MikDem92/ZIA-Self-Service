@@ -71,7 +71,7 @@ function activate($access_token){
     if ($status_code !== 200) {
         echo "Request failed! Please contact the administrator.\n";
     } else {
-       echo "Request granted!\n"; 
+       echo "Access granted!\n"; 
     }
 }
 ?>
