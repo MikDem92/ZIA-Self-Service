@@ -33,14 +33,14 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
  
     // Check if request failed
     if ($status_code !== 200) {
-        echo "Request failed! Please contact the administrator.";
+        echo "Access token not granted! Please contact the administrator.\n";
         return array(
             "access_token" => "",
             "expires_on" => 0
         );
     } else {
        $response_data = json_decode($response);
-       echo "Request successful";
+       //echo "Request successful";
        return array(
             "access_token" => $response_data->access_token,
             "expires_on" => time() + $response_data->expires_in

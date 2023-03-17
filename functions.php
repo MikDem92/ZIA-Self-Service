@@ -36,9 +36,9 @@ function add_url_to_category($category_name, $category_id, $url, $access_token){
     }
 
     if ($status_code !== 200) {
-        echo "Request failed! Please contact the administrator.";
+        echo "Request failed! Please contact the administrator.\n";
     } else {
-       echo "Request successful"; 
+       echo "Request sent\n"; 
     }
 }
 
@@ -69,9 +69,9 @@ function activate($access_token){
     }
 
     if ($status_code !== 200) {
-        echo "Request failed! Please contact the administrator.";
+        echo "Request failed! Please contact the administrator.\n";
     } else {
-       echo "Request successful"; 
+       echo "Request granted!\n"; 
     }
 }
 ?>
