@@ -50,6 +50,7 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
 
 // Check if ACCESS_TOKEN environment variable exists
 if ($access_token == "" or time() > $expires_on) {
+    echo "I am here";
     // Construct the relative path to the JSON file
     $config_path = $parent_dir . '/config.json';
 
