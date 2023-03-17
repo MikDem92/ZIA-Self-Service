@@ -6,6 +6,7 @@ if (session_status() == 0){
     $_SESSION["ACCESS_TOKEN"] = "";
     $_SESSION["EXPIRES_ON"] = 0;
 }
+
 function get_domain_name($url) {
   $parsed_url = parse_url($url);
   $domain_parts = explode('.', $parsed_url['host']);

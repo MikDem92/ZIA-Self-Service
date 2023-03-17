@@ -1,9 +1,9 @@
 <?php
-echo session_status();
-print_r($_SESSION);
+include(
+    "functions.php"
+);
 
 if (session_status() == 0){
-    echo "Starting session...";
     session_start();
     $_SESSION["ACCESS_TOKEN"] = "";
     $_SESSION["EXPIRES_ON"] = 0;
@@ -52,7 +52,6 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
 if ($_SESSION["ACCESS_TOKEN"] == "" or time() > $_SESSION["EXPIRES_ON"]) {
     // Get the parent directory path using the __DIR__ magic constant
     $parent_dir = dirname(__DIR__);
-    echo "I am here";
     // Construct the relative path to the JSON file
     $config_path = $parent_dir . '/config.json';
 
@@ -73,20 +72,15 @@ if ($_SESSION["ACCESS_TOKEN"] == "" or time() > $_SESSION["EXPIRES_ON"]) {
     $_SESSION["ACCESS_TOKEN"] = $token_info["access_token"];
     $_SESSION["EXPIRES_ON"] = $token_info["expires_on"];
     //print_r($_SESSION);
-} else {
-    echo "Token still valid. Expires in ".$_SESSION["EXPIRES_ON"] - time()." seconds";
 }
 
-
-/*
 $user = $_POST["user"];
 $url = $_POST["url"];
+$category_name = "API Test Category";
+$category_id = "CUSTOM_03";
 
-echo $user."\n";
-echo $url."\n";
-echo $client_id."\n";
-echo $client_secret."\n";
-echo $scope;
-*/
+add_url_to_category($auth_server, $category_name, $category_id, $url, $_SESSION["ACCESS_TOKEN"]);
+
+
 ?>
 
