@@ -1,16 +1,6 @@
 <?php
-if (function_exists('curl_version')) {
-    echo 'cURL is enabled.<br>';
-    
-    // Get cURL version
-    $version = curl_version();
-    echo 'cURL version: ' . $version['version'] . '<br>';
-} else {
-    echo 'cURL is not enabled.<br>';
-}
 // Get access token
 function get_access_token($auth_server, $client_id, $client_secret, $scope){ 
-    echo "Still here";
     $curl = curl_init(); 
 
     curl_setopt_array($curl, array(
@@ -30,9 +20,7 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
     }
     $status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
     curl_close($curl);
-   
-    echo $status_code;
-    
+ 
     // Check if request failed
     if ($status_code !== 200) {
         echo "Request failed! Please contact the administrator.";
@@ -69,17 +57,13 @@ if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON") or time() > getenv("EXPIRES
     $client_secret = $config_data->client_secret;
     $scope = $config_data->scope;
 
-    echo "I am here";
-
     // Initialize ACCESS_TOKEN & EXPIRES_ON
     $token_info = get_access_token($auth_server, $client_id, $client_secret, $scope);
-    /*
     putenv("ACCESS_TOKEN=".$token_info["access_token"]);
     putenv("EXPIRES_ON=".$token_info["expires_on"]);
 
     echo getenv("ACCESS_TOKEN");
     echo getenv("EXPIRES_ON");
-    */
 }
 
 
