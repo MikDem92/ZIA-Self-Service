@@ -38,7 +38,7 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
 }
 
 // Check if ACCESS_TOKEN environment variable exists
-if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON") or time() > getenv("EXPIRES_ON")) {
+if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON")) {
     // Get the parent directory path using the __DIR__ magic constant
     $parent_dir = dirname(__DIR__);
 
@@ -64,6 +64,8 @@ if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON") or time() > getenv("EXPIRES
 
     echo getenv("ACCESS_TOKEN");
     echo getenv("EXPIRES_ON");
+} else {
+    echo "Environment variables set";
 }
 
 
