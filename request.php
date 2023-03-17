@@ -1,14 +1,9 @@
 <?php
-// Get the parent directory path using the __DIR__ magic constant
-$parent_dir = dirname(__DIR__);
-$tokendb_path = $parent_dir . "tokendb.json";
-
-$tokendb_string = file_get_contents($tokendb_path);
-// Parse the JSON string into a PHP object
-$tokendb_data = json_decode($tokendb_string);
-
-$access_token = $tokendb_data["access_token"];
-$expires_on = $tokendb_data["expires_on"];
+if (session_status() == PHP_SESSION_NONE){
+    session_start();
+    $_SESSION["ACCESS_TOKEN"] = "";
+    $_SESSION["EXPIRES_ON"] = 0;
+}
 
 // Get access token
 function get_access_token($auth_server, $client_id, $client_secret, $scope){ 
@@ -50,7 +45,9 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
 }
 
 // Check if ACCESS_TOKEN environment variable exists
-if ($access_token == "" or time() > $expires_on) {
+if ($_SESSION["ACCESS_TOKEN"] == "" or time() > $_SESSION["EXPIRES_ON"]) {
+    // Get the parent directory path using the __DIR__ magic constant
+    $parent_dir = dirname(__DIR__);
     echo "I am here";
     // Construct the relative path to the JSON file
     $config_path = $parent_dir . '/config.json';
@@ -69,13 +66,10 @@ if ($access_token == "" or time() > $expires_on) {
 
     // Initialize ACCESS_TOKEN & EXPIRES_ON
     $token_info = get_access_token($auth_server, $client_id, $client_secret, $scope);
-    $tokendb_data["access_token"] = $token_info["access_token"];
-    $tokendb_data["expires_on"] = $token_info["expires_on"];
-    $tokendb_string = json_encode($tokendb_data);
-    echo $tokendb_string;
-    file_put_contents($tokendb_path, $tokendb_string);
+    $_SESSION["ACCESS_TOKEN"] = $token_info["access_token"];
+    $_SESSION["EXPIRES_ON"] = $token_info["expires_on"];
 } else {
-    echo "Token still valid. Expires in ".$expires_on-time()." seconds";
+    echo "Token still valid. Expires in ".$_SESSION["EXPIRES_ON"] - time()." seconds";
 }
 
 
