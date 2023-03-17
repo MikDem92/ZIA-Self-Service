@@ -68,11 +68,10 @@ if ($access_token == "" or time() > $expires_on) {
 
     // Initialize ACCESS_TOKEN & EXPIRES_ON
     $token_info = get_access_token($auth_server, $client_id, $client_secret, $scope);
-    putenv("ACCESS_TOKEN=".$token_info["access_token"]);
-    putenv("EXPIRES_ON=".$token_info["expires_on"]);
-
-    echo getenv("ACCESS_TOKEN");
-    echo getenv("EXPIRES_ON");
+    $tokendb_data["access_token"] = $token_info["access_token"];
+    $tokendb_data["expires_on"] = $token_info["expires_on"];
+    $tokendb_string = json_encode($tokendb_data);
+    file_put_contents($tokendb_path, $tokendb_string);
 } else {
     echo "Token still valid. Expires in ".$expires_on-time()." seconds";
 }
