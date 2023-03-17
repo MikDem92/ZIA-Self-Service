@@ -15,8 +15,8 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => array('grant_type' => 'client_credentials','client_id' => $client_id,'client_secret' => $client_secret,'scope' => $scope)
     ));
-    $status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
     $response = curl_exec($curl);
+    $status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
     curl_close($curl);
    
     echo $response;
