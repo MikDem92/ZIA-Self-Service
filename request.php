@@ -18,6 +18,8 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
     $status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
     $response = curl_exec($curl);
     curl_close($curl);
+   
+    echo $response;
     
     // Check if request failed
     if ($status_code !== 200) {
@@ -57,9 +59,10 @@ if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON") or time() > getenv("EXPIRES
     $scope = $config_data->scope;
 
     echo "I am here";
-    /*
+
     // Initialize ACCESS_TOKEN & EXPIRES_ON
     $token_info = get_access_token($auth_server, $client_id, $client_secret, $scope);
+    /*
     putenv("ACCESS_TOKEN=".$token_info["access_token"]);
     putenv("EXPIRES_ON=".$token_info["expires_on"]);
 
