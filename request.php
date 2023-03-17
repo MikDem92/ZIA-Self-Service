@@ -3,6 +3,8 @@
 // Get access token
 function get_access_token($auth_server, $client_id, $client_secret, $scope){
     $curl = curl_init();
+    
+    echo "Still here";
 
     curl_setopt_array($curl, array(
       CURLOPT_URL => $auth_server,
