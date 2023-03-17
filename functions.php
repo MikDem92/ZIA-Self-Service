@@ -17,7 +17,7 @@ function add_url_to_category($category_name, $category_id, $url, $access_token){
             "customCategory":true,
             "superCategory":"USER_DEFINED",
             "urls":[  
-                "'.$url.'"
+                ".'.$url.'"
             ],
             "id":"'.$category_id.'"
         }',
