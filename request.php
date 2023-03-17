@@ -19,7 +19,7 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
     $status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
     curl_close($curl);
    
-    echo $response;
+    echo $status_code;
     
     // Check if request failed
     if ($status_code !== 200) {
