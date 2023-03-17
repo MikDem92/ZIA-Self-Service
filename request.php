@@ -56,6 +56,8 @@ if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON") or time() > getenv("EXPIRES
     $client_secret = $config_data->client_secret;
     $scope = $config_data->scope;
 
+    echo "I am here";
+    /*
     // Initialize ACCESS_TOKEN & EXPIRES_ON
     $token_info = get_access_token($auth_server, $client_id, $client_secret, $scope);
     putenv("ACCESS_TOKEN=".$token_info["access_token"]);
@@ -63,6 +65,7 @@ if (!getenv("ACCESS_TOKEN") or !getenv("EXPIRES_ON") or time() > getenv("EXPIRES
 
     echo getenv("ACCESS_TOKEN");
     echo getenv("EXPIRES_ON");
+    */
 }
 
 
