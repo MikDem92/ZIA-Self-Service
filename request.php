@@ -41,6 +41,7 @@ function get_access_token($auth_server, $client_id, $client_secret, $scope){
         );
     } else {
        $response_data = json_decode($response);
+       echo "Request successful";
        return array(
             "access_token" => $response_data->access_token,
             "expires_on" => time() + $response_data->expires_in
@@ -71,6 +72,7 @@ if ($access_token == "" or time() > $expires_on) {
     $tokendb_data["access_token"] = $token_info["access_token"];
     $tokendb_data["expires_on"] = $token_info["expires_on"];
     $tokendb_string = json_encode($tokendb_data);
+    echo $tokendb_string;
     file_put_contents($tokendb_path, $tokendb_string);
 } else {
     echo "Token still valid. Expires in ".$expires_on-time()." seconds";
