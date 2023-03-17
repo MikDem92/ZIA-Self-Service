@@ -1,12 +1,13 @@
 <?php
 echo session_status();
+print_r($_SESSION);
+
 if (session_status() == PHP_SESSION_NONE){
     session_start();
     $_SESSION["ACCESS_TOKEN"] = "";
     $_SESSION["EXPIRES_ON"] = 0;
 }
 
-print_r($_SESSION);
 // Get access token
 function get_access_token($auth_server, $client_id, $client_secret, $scope){ 
     $curl = curl_init(); 
